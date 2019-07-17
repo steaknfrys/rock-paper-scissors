@@ -6,5 +6,48 @@
   </head>
   <body>
     <h1>Rock Paper Scissors</h1>
+
+    <script type="text/javascript">
+      function computerPlay() {
+        let pick = Math.floor(Math.random()*3)+1;
+        let selection
+        if (pick == 1) {
+          selection = "ROCK";
+        } else if (pick == 2) {
+          selection = "PAPER";
+        } else {
+          selection = "SCISSORS";
+        }
+      }
+
+      function playRound (playerSelection, computerSelection) {
+        switch playerSelection {
+          case "ROCK"
+            if (computerSelection == "ROCK") {
+              return "Draw!"
+            } else if (computerSelection == "PAPER") {
+              return "You Lose!"
+            } else return "You Win!"
+
+
+          case "PAPER":
+          if (computerSelection == "ROCK") {
+            return "You Win!"
+          } else if (computerSelection == "PAPER") {
+            return "Draw!"
+          } else return "You Lose!"
+
+          case "SCISSORS":
+          if (computerSelection == "ROCK") {
+            return "You Lose!"
+          } else if (computerSelection == "PAPER") {
+            return "You Win!"
+          } else return "Draw!"
+
+          default:
+            return "not a valid entry"
+        }
+      }
+    </script>
   </body>
 </html>

@@ -8,7 +8,9 @@
     <h1>Rock Paper Scissors</h1>
 
     <script type="text/javascript">
-      function computerPlay() {
+
+    //Decideing what the computer will pick
+    function computerPlay() {
         let pick = Math.floor(Math.random()*3)+1;
         let selection
         if (pick == 1) {
@@ -18,30 +20,64 @@
         } else {
           selection = "SCISSORS";
         }
+        return selection;
       }
 
+      //A five round game of rock paper scissors
+      function game() {
+        let playerTotal = 0;
+        let computerTotal = 0;
+        for (var i = 0; i < 5.length; i++) {
+          let playerChoice = prompt('Rock, Paper or Scissors?');
+          let result = playRound(playerChoice, computerPlay());
+          switch result{
+            case
+          }
+        }
+      }
+
+      function findResult(round) {
+        switch round {
+          case "Draw!":
+            break;
+          case "You Lose! Paper covers rock!":
+          case "You Lose! Scissors cut paper":
+          case "You Lose! Rock smashes scissors!":
+            computerTotal++;
+            break;
+          case "You Win! Rock smashes scissors!":
+          case "You Win! Paper covers rock!":
+          case "You Win! Scissors cut paper!":
+            playerTotal++;
+            break;
+          default:
+            console.log("errror");
+            break;
+        }
+      }
+
+      //Finding out who wins the game
       function playRound (playerSelection, computerSelection) {
+        playerSelection=playerSelection.toUpperCase();
         switch playerSelection {
           case "ROCK"
             if (computerSelection == "ROCK") {
               return "Draw!"
             } else if (computerSelection == "PAPER") {
-              return "You Lose!"
-            } else return "You Win!"
-
-
+              return "You Lose! Paper covers rock!"
+            } else return "You Win! Rock smashes scissors!"
           case "PAPER":
           if (computerSelection == "ROCK") {
-            return "You Win!"
+            return "You Win! Paper covers rock!"
           } else if (computerSelection == "PAPER") {
             return "Draw!"
-          } else return "You Lose!"
+          } else return "You Lose! Scissors cut paper"
 
           case "SCISSORS":
           if (computerSelection == "ROCK") {
-            return "You Lose!"
+            return "You Lose! Rock smashes scissors!"
           } else if (computerSelection == "PAPER") {
-            return "You Win!"
+            return "You Win! Scissors cut paper!"
           } else return "Draw!"
 
           default:

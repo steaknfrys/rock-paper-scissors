@@ -9,7 +9,7 @@
 
     <script type="text/javascript">
 
-    //Decideing what the computer will pick
+      //Decideing what the computer will pick
       function computerPlay() {
         let pick = Math.floor(Math.random()*3)+1;
         let selection
@@ -23,6 +23,7 @@
         return selection;
       }
 
+      //Determining if the user winds the round 1 for win, -1 for loss, 0 for draw
       function roundResult(round) {
         switch (round) {
           case "Draw!":
@@ -53,6 +54,8 @@
           //findResult(result);
           score += roundResult(result);
           }
+
+        //checking if the user wins the 5 game series or not
         if (score>0) {
           console.log("YOU WIN");
         } else if (score<0) {
@@ -64,7 +67,7 @@
 
 
 
-      //Finding out who wins the game
+      //Spits out a string based on the player and computer selection
       function playRound (playerSelection, computerSelection) {
         playerSelection=playerSelection.toUpperCase();
         switch (playerSelection){

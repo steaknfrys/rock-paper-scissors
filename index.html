@@ -10,7 +10,7 @@
     <script type="text/javascript">
 
     //Decideing what the computer will pick
-    function computerPlay() {
+      function computerPlay() {
         let pick = Math.floor(Math.random()*3)+1;
         let selection
         if (pick == 1) {
@@ -23,21 +23,8 @@
         return selection;
       }
 
-      //A five round game of rock paper scissors
-      function game() {
-        let playerTotal = 0;
-        let computerTotal = 0;
-        for (var i = 0; i < 5.length; i++) {
-          let playerChoice = prompt('Rock, Paper or Scissors?');
-          let result = playRound(playerChoice, computerPlay());
-          switch result{
-            case
-          }
-        }
-      }
-
       function findResult(round) {
-        switch round {
+        switch (round) {
           case "Draw!":
             break;
           case "You Lose! Paper covers rock!":
@@ -56,16 +43,52 @@
         }
       }
 
+      //A five round game of rock paper scissors
+      function game() {
+        let computerTotal=0;
+        let playerTotal=0;
+
+        for (let i = 0; i < 5; i++) {
+          let playerChoice = prompt('Rock, Paper or Scissors?');
+          playerChoice = playerChoice.toUpperCase();
+          let result = playRound(playerChoice, computerPlay());
+          console.log(result);
+          //findResult(result);
+          switch (result) {
+            case "Draw!":
+              break;
+            case "You Lose! Paper covers rock!":
+            case "You Lose! Scissors cut paper":
+            case "You Lose! Rock smashes scissors!":
+              computerTotal++;
+              break;
+            case "You Win! Rock smashes scissors!":
+            case "You Win! Paper covers rock!":
+            case "You Win! Scissors cut paper!":
+              playerTotal++;
+              break;
+            default:
+              console.log("errror");
+              break;
+          }
+        }
+        console.log("computer total: " + computerTotal);
+        console.log('player total: '+ playerTotal);
+
+      }
+
+
+
       //Finding out who wins the game
       function playRound (playerSelection, computerSelection) {
         playerSelection=playerSelection.toUpperCase();
-        switch playerSelection {
-          case "ROCK"
+        switch (playerSelection){
+          case "ROCK":
             if (computerSelection == "ROCK") {
               return "Draw!"
             } else if (computerSelection == "PAPER") {
-              return "You Lose! Paper covers rock!"
-            } else return "You Win! Rock smashes scissors!"
+              return "You Lose! Paper covers rock!";
+            } else return "You Win! Rock smashes scissors!";
           case "PAPER":
           if (computerSelection == "ROCK") {
             return "You Win! Paper covers rock!"

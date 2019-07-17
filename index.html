@@ -23,20 +23,18 @@
         return selection;
       }
 
-      function findResult(round) {
+      function roundResult(round) {
         switch (round) {
           case "Draw!":
-            break;
+            return 0;
           case "You Lose! Paper covers rock!":
           case "You Lose! Scissors cut paper":
           case "You Lose! Rock smashes scissors!":
-            computerTotal++;
-            break;
+            return -1;
           case "You Win! Rock smashes scissors!":
           case "You Win! Paper covers rock!":
           case "You Win! Scissors cut paper!":
-            playerTotal++;
-            break;
+            return 1;
           default:
             console.log("errror");
             break;
@@ -45,8 +43,7 @@
 
       //A five round game of rock paper scissors
       function game() {
-        let computerTotal=0;
-        let playerTotal=0;
+        let score=0;
 
         for (let i = 0; i < 5; i++) {
           let playerChoice = prompt('Rock, Paper or Scissors?');
@@ -54,27 +51,15 @@
           let result = playRound(playerChoice, computerPlay());
           console.log(result);
           //findResult(result);
-          switch (result) {
-            case "Draw!":
-              break;
-            case "You Lose! Paper covers rock!":
-            case "You Lose! Scissors cut paper":
-            case "You Lose! Rock smashes scissors!":
-              computerTotal++;
-              break;
-            case "You Win! Rock smashes scissors!":
-            case "You Win! Paper covers rock!":
-            case "You Win! Scissors cut paper!":
-              playerTotal++;
-              break;
-            default:
-              console.log("errror");
-              break;
+          score += roundResult(result);
           }
+        if (score>0) {
+          console.log("YOU WIN");
+        } else if (score<0) {
+          console.log("YOU LOSE");
+        } else {
+          console.log("game ended in a draw :(");
         }
-        console.log("computer total: " + computerTotal);
-        console.log('player total: '+ playerTotal);
-
       }
 
 

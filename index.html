@@ -6,8 +6,20 @@
   </head>
   <body>
     <h1>Rock Paper Scissors</h1>
+    <div class="buttons">
+      <button type="button" id="ROCK">Rock</button>
+      <button type="button" id="PAPER">Paper</button>
+      <button type="button" id="SCISSORS">Scissors</button>
+    </div>
+    <div class="results"></div>
+    <div class="winner"></div>
 
     <script type="text/javascript">
+
+      const results = document.querySelector('.results');
+      const winScreen = document.querySelector('.winner');
+      var playerScore = 0;
+      var computerScore = 0;
 
       //Decideing what the computer will pick
       function computerPlay() {
@@ -23,53 +35,29 @@
         return selection;
       }
 
-      //Determining if the user winds the round 1 for win, -1 for loss, 0 for draw
-      function roundResult(round) {
+      //Keeps Track of the scores
+      function updateScore(round) {
         switch (round) {
           case "Draw!":
-            return 0;
+            break;
           case "You Lose! Paper covers rock!":
           case "You Lose! Scissors cut paper":
           case "You Lose! Rock smashes scissors!":
-            return -1;
+            winScreen.textContent = "Computer: "+ (++computerScore)+ " Player: " + playerScore;
+            break;
           case "You Win! Rock smashes scissors!":
           case "You Win! Paper covers rock!":
           case "You Win! Scissors cut paper!":
-            return 1;
+            winScreen.textContent = "Computer: "+ (computerScore)+ " Player: " + (++playerScore);
+            break;
           default:
             console.log("errror");
             break;
         }
       }
 
-      //A five round game of rock paper scissors
-      function game() {
-        let score=0;
-
-        for (let i = 0; i < 5; i++) {
-          let playerChoice = prompt('Rock, Paper or Scissors?');
-          playerChoice = playerChoice.toUpperCase();
-          let result = playRound(playerChoice, computerPlay());
-          console.log(result);
-          //findResult(result);
-          score += roundResult(result);
-          }
-
-        //checking if the user wins the 5 game series or not
-        if (score>0) {
-          console.log("YOU WIN");
-        } else if (score<0) {
-          console.log("YOU LOSE");
-        } else {
-          console.log("game ended in a draw :(");
-        }
-      }
-
-
-
       //Spits out a string based on the player and computer selection
       function playRound (playerSelection, computerSelection) {
-        playerSelection=playerSelection.toUpperCase();
         switch (playerSelection){
           case "ROCK":
             if (computerSelection == "ROCK") {
@@ -95,6 +83,21 @@
             return "not a valid entry"
         }
       }
+
+      function playGame(e){
+        console.log(e.target.id);
+        let result = playRound(e.target.id, computerPlay());
+        results.textContent=(result);
+        updateScore(result);
+        if(playerScore == 5){
+          winScreen.textContent="Player Wins!";
+        } else if(computerScore == 5){
+          winScreen.textContent="Computer Wins!";
+        }
+      }
+
+      const buttons = document.querySelectorAll('button');
+      buttons.forEach(button => button.addEventListener('click',playGame));
     </script>
   </body>
 </html>
